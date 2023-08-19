@@ -5,6 +5,7 @@ import { store, persistor } from './redux/store';
 import { Auth0Provider } from '@auth0/auth0-react';
 const { VITE_AUTH0_DOMAIN, VITE_AUTH0_CLIENT_ID } = import.meta.env;
 import MyAuthProvider from './components/MyAuthProvider';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import './index.css';
 
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         authorizationParams={{ redirect_uri: window.location.origin }}
       >
         <MyAuthProvider>
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </MyAuthProvider>
       </Auth0Provider>
     </PersistGate>
