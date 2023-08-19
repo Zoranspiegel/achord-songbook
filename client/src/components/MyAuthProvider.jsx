@@ -3,8 +3,6 @@ import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logUser, logoutUser } from '../redux/actions';
-import LoginButton from './LoginButton';
-import LogoutButton from './LogoutButton';
 
 export default function MyAuthProvider({ children }) {
   const dispatch = useDispatch();
@@ -19,6 +17,7 @@ export default function MyAuthProvider({ children }) {
     if (isAuthenticated && !isLoading && loggedUser.status === 'guest') {
       const body = {
         auth0_sub: user.sub,
+        name: user.given_name,
         nickname: user.nickname,
         email: user.email,
         profile_picture: user.picture
@@ -34,7 +33,6 @@ export default function MyAuthProvider({ children }) {
 
   return (
     <>
-      {isAuthenticated ? <LogoutButton /> : <LoginButton />}
       {children}
     </>
   );
