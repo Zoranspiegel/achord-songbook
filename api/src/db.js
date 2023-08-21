@@ -19,7 +19,13 @@ fs.readdirSync(path.join(__dirname, 'models')).forEach(file => {
 
 models.forEach(model => model(sequelize));
 
-console.log(sequelize.models);
+const { user, artist, song } = sequelize.models;
+
+user.hasMany(song);
+song.belongsTo(user);
+
+artist.hasMany(song);
+song.belongsTo(artist);
 
 module.exports = {
   db: sequelize,

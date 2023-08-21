@@ -1,0 +1,4 @@
+.app__container {
+  min-height: 100vh;
+  background: url('./assets/achord_background.jpg');
+}

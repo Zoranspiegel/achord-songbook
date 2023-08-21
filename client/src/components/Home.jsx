@@ -1,12 +1,18 @@
 import logo from '../assets/achord_logo.png';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import User from './User';
 import style from './styles/Home.module.css';
 
 export default function Home() {
+  const logged = useSelector(state => state.loggedUser.status === 'logged');
+  const navigate = useNavigate();
+
   return (
     <div className={style.home__container}>
       <img className={style.home__logo} src={logo} alt='A/Chord logo' />
       <User />
+      {logged && <button onClick={() => navigate('/song/new')}>New Song</button>}
     </div>
   );
 }
