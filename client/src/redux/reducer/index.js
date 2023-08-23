@@ -6,9 +6,9 @@ import {
   CREATE_SONG,
   CREATE_SONG_LOADING,
   CREATE_SONG_ERROR,
-  GET_ARTISTS,
-  GET_ARTISTS_LOADING,
-  GET_ARTISTS_ERROR,
+  GET_USER_ARTISTS,
+  GET_USER_ARTISTS_LOADING,
+  GET_USER_ARTISTS_ERROR,
   GET_USER_SONGS,
   GET_USER_SONGS_LOADING,
   GET_USER_SONGS_ERROR,
@@ -25,7 +25,7 @@ const initialState = {
     status: 'idle',
     error: null
   },
-  artists: {
+  userArtists: {
     data: [],
     status: 'idle',
     error: null
@@ -124,28 +124,28 @@ export default function reducer(state = initialState, action) {
           error: action.payload
         }
       };
-    case GET_ARTISTS_LOADING:
+    case GET_USER_ARTISTS_LOADING:
       return {
         ...state,
-        artists: {
+        userArtists: {
           data: [],
           status: 'loading',
           error: null
         }
       };
-    case GET_ARTISTS:
+    case GET_USER_ARTISTS:
       return {
         ...state,
-        artists: {
+        userArtists: {
           data: action.payload,
           status: 'success',
           error: null
         }
       };
-    case GET_ARTISTS_ERROR:
+    case GET_USER_ARTISTS_ERROR:
       return {
         ...state,
-        artists: {
+        userArtists: {
           data: [],
           status: 'error',
           error: action.payload

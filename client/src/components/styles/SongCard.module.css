@@ -1,0 +1,30 @@
+.card__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 200px;
+  height: 250px;
+  border-left: 2px solid rgba(255,255,255,0.3);
+  border-top: 2px solid rgba(255,255,255,0.3);
+  background: linear-gradient(135deg, rgba(255,255,255, 0.2), rgba(255,255,255, 0));
+  backdrop-filter: blur(1.1px);
+  box-shadow: 0 8px 20px 0 rgba(255,255,255,0.2);
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.card__container:hover {
+  transform: translateY(-5px);
+}
+
+.card__container h1 {
+  font-size: 1.5em;
+  text-align: center;
+}
+.card__container h2 {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}

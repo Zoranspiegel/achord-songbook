@@ -9,9 +9,9 @@ export const CREATE_SONG = 'CREATE_SONG';
 export const CREATE_SONG_LOADING = 'CREATE_SONG_LOADING';
 export const CREATE_SONG_ERROR = 'CREATE_SONG_ERROR';
 
-export const GET_ARTISTS = 'GET_ARTISTS';
-export const GET_ARTISTS_LOADING = 'GET_ARTISTS_LOADING';
-export const GET_ARTISTS_ERROR = 'GET_ARTISTS_ERROR';
+export const GET_USER_ARTISTS = 'GET_USER_ARTISTS';
+export const GET_USER_ARTISTS_LOADING = 'GET_USER_ARTISTS_LOADING';
+export const GET_USER_ARTISTS_ERROR = 'GET_USER_ARTISTS_ERROR';
 
 export const GET_USER_SONGS = 'GET_USER_SONGS';
 export const GET_USER_SONGS_LOADING = 'GET_USER_SONGS_LOADING';
@@ -39,6 +39,7 @@ export const logUser = (body) => (dispatch) => {
 
 // LOG_OUT_USER
 export const logoutUser = () => {
+  localStorage.removeItem('fetchGate');
   return { type: LOG_OUT_USER };
 };
 
@@ -81,9 +82,9 @@ export const createSong = (body, token) => (dispatch) => {
 };
 
 export const getArtists = (token) => (dispatch) => {
-  // GET_ARTISTS_LOADING
-  dispatch({ type: GET_ARTISTS_LOADING });
-  fetch(`${VITE_SERVER_URL}/artist`, {
+  // GET_USER_ARTISTS_LOADING
+  dispatch({ type: GET_USER_ARTISTS_LOADING });
+  return fetch(`${VITE_SERVER_URL}/artist`, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -92,10 +93,10 @@ export const getArtists = (token) => (dispatch) => {
       if (!res.ok) throw new Error('Bad Request');
       return res.json();
     })
-    // GET_ARTISTS
-    .then(payload => dispatch({ type: GET_ARTISTS, payload }))
-    // GET_ARTISTS_ERROR
-    .catch(error => dispatch({ type: GET_ARTISTS_ERROR, payload: error.message }));
+    // GET_USER_ARTISTS
+    .then(payload => dispatch({ type: GET_USER_ARTISTS, payload }))
+    // GET_USER_ARTISTS_ERROR
+    .catch(error => dispatch({ type: GET_USER_ARTISTS_ERROR, payload: error.message }));
 };
 
 export const getUserSongs = (token) => (dispatch) => {

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSong } from '../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
-import style from './styles/CreateSong.module.css';
+import style from './styles/CreateEditSong.module.css';
 
 const initialSongState = {
   title: '',
@@ -32,6 +32,7 @@ export default function CreateEditSong() {
     e.preventDefault();
     dispatch(createSong(songState, token));
     setSongState(initialSongState);
+    localStorage.setItem('fetchGate', false);
     navigate('/');
   };
 
