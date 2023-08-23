@@ -2,6 +2,7 @@ import logo from '../assets/achord_logo.png';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import User from './User';
+import Songs from './Songs';
 import style from './styles/Home.module.css';
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
     <div className={style.home__container}>
       <img className={style.home__logo} src={logo} alt='A/Chord logo' />
       <User />
+      {logged && <Songs />}
       {logged && <button onClick={() => navigate('/song/new')}>New Song</button>}
     </div>
   );

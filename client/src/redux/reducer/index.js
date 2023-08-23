@@ -5,7 +5,13 @@ import {
   LOG_OUT_USER,
   CREATE_SONG,
   CREATE_SONG_LOADING,
-  CREATE_SONG_ERROR
+  CREATE_SONG_ERROR,
+  GET_ARTISTS,
+  GET_ARTISTS_LOADING,
+  GET_ARTISTS_ERROR,
+  GET_USER_SONGS,
+  GET_USER_SONGS_LOADING,
+  GET_USER_SONGS_ERROR,
 } from '../actions';
 
 const initialState = {
@@ -16,6 +22,16 @@ const initialState = {
   },
   newSong: {
     id: null,
+    status: 'idle',
+    error: null
+  },
+  artists: {
+    data: [],
+    status: 'idle',
+    error: null
+  },
+  userSongs: {
+    data: [],
     status: 'idle',
     error: null
   }
@@ -77,6 +93,60 @@ export default function reducer(state = initialState, action) {
         ...state,
         newSong: {
           id: null,
+          status: 'error',
+          error: action.payload
+        }
+      };
+    case GET_USER_SONGS_LOADING:
+      return {
+        ...state,
+        userSongs: {
+          data: [],
+          status: 'loading',
+          error: null
+        }
+      };
+    case GET_USER_SONGS:
+      return {
+        ...state,
+        userSongs: {
+          data: action.payload,
+          status: 'success',
+          error: null
+        }
+      };
+    case GET_USER_SONGS_ERROR:
+      return {
+        ...state,
+        userSongs: {
+          data: [],
+          status: 'error',
+          error: action.payload
+        }
+      };
+    case GET_ARTISTS_LOADING:
+      return {
+        ...state,
+        artists: {
+          data: [],
+          status: 'loading',
+          error: null
+        }
+      };
+    case GET_ARTISTS:
+      return {
+        ...state,
+        artists: {
+          data: action.payload,
+          status: 'success',
+          error: null
+        }
+      };
+    case GET_ARTISTS_ERROR:
+      return {
+        ...state,
+        artists: {
+          data: [],
           status: 'error',
           error: action.payload
         }

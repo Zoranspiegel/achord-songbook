@@ -10,7 +10,7 @@ const initialSongState = {
   content: '',
 };
 
-export default function CreateSong() {
+export default function CreateEditSong() {
   const dispatch = useDispatch();
   const [songState, setSongState] = useState(initialSongState);
   const token = useSelector((state) => state.loggedUser.data.token);

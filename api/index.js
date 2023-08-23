@@ -4,7 +4,7 @@ const { db } = require('./src/db');
 
 const PORT = process.env.PORT || 3001;
 
-db.sync({ force: true })
+db.sync({ force: false })
   .then(() => {
     console.log('🐘 Connected to postgreSQL database');
     app.listen(PORT, () => {

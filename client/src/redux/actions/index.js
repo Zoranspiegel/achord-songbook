@@ -9,6 +9,14 @@ export const CREATE_SONG = 'CREATE_SONG';
 export const CREATE_SONG_LOADING = 'CREATE_SONG_LOADING';
 export const CREATE_SONG_ERROR = 'CREATE_SONG_ERROR';
 
+export const GET_ARTISTS = 'GET_ARTISTS';
+export const GET_ARTISTS_LOADING = 'GET_ARTISTS_LOADING';
+export const GET_ARTISTS_ERROR = 'GET_ARTISTS_ERROR';
+
+export const GET_USER_SONGS = 'GET_USER_SONGS';
+export const GET_USER_SONGS_LOADING = 'GET_USER_SONGS_LOADING';
+export const GET_USER_SONGS_ERROR = 'GET_USER_SONGS_ERROR';
+
 export const logUser = (body) => (dispatch) => {
   // LOGGING_USER
   dispatch({ type: LOGGING_USER });
@@ -35,6 +43,7 @@ export const logoutUser = () => {
 };
 
 export const createSong = (body, token) => (dispatch) => {
+  // CREATE_SONG_LOADING
   dispatch({ type: CREATE_SONG_LOADING });
   const { artistName, ...rest } = body;
   fetch(`${VITE_SERVER_URL}/artist`, {
@@ -62,8 +71,47 @@ export const createSong = (body, token) => (dispatch) => {
           if (!res.ok) throw new Error('Bad Request');
           return res.json();
         })
+        // CREATE_SONG
         .then(payload => dispatch({ type: CREATE_SONG, payload }))
+        // CREATE_SONG_ERROR
         .catch(error => dispatch({ type: CREATE_SONG_ERROR, payload: error.message }));
     })
+    // CREATE_SONG_ERROR
     .catch(error => dispatch({ type: CREATE_SONG_ERROR, payload: error.message }));
+};
+
+export const getArtists = (token) => (dispatch) => {
+  // GET_ARTISTS_LOADING
+  dispatch({ type: GET_ARTISTS_LOADING });
+  fetch(`${VITE_SERVER_URL}/artist`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(res => {
+      if (!res.ok) throw new Error('Bad Request');
+      return res.json();
+    })
+    // GET_ARTISTS
+    .then(payload => dispatch({ type: GET_ARTISTS, payload }))
+    // GET_ARTISTS_ERROR
+    .catch(error => dispatch({ type: GET_ARTISTS_ERROR, payload: error.message }));
+};
+
+export const getUserSongs = (token) => (dispatch) => {
+  // GET_USER_SONGS_LOADING
+  dispatch({ type: GET_USER_SONGS_LOADING });
+  fetch(`${VITE_SERVER_URL}/song`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(res => {
+      if (!res.ok) throw new Error('Bad Request');
+      return res.json();
+    })
+    // GET_USER_SONGS
+    .then(payload => dispatch({ type: GET_USER_SONGS, payload }))
+    // GET_USER_SONGS_ERROR
+    .catch(error => dispatch({ type: GET_USER_SONGS_ERROR, payload: error.message }));
 };

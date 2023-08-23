@@ -27,6 +27,9 @@ song.belongsTo(user);
 artist.hasMany(song);
 song.belongsTo(artist);
 
+user.hasMany(artist);
+artist.belongsTo(user);
+
 module.exports = {
   db: sequelize,
   ...sequelize.models

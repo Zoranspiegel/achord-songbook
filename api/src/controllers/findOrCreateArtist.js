@@ -9,6 +9,9 @@ module.exports = async (req, res) => {
       },
       defaults: rest
     });
+    if (created) {
+      await foundOrCreatedArtist.setUser(req.authData.id);
+    }
     const statusCode = created ? 201 : 200;
     res.status(statusCode).json(foundOrCreatedArtist.id);
   } catch (error) {
