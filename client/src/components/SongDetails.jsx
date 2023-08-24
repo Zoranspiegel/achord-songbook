@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSongDetails, cleanDetails } from '../redux/actions';
+import { getSongDetails } from '../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
+import isUUID from '../utils/isUUID';
 import style from './styles/SongDetails.module.css';
 
 export default function SongDetails() {
@@ -12,8 +13,9 @@ export default function SongDetails() {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getSongDetails(id, token));
-    return () => dispatch(cleanDetails());
+    if (isUUID(id)) {
+      dispatch(getSongDetails(id, token));
+    }
   }, []);
 
   if (songDetails.status === 'loading') return null;
@@ -28,6 +30,9 @@ export default function SongDetails() {
           <h2 className={style.details__artist}>{songDetails.data.artist}</h2>
           <p className={style.details__content}>{songDetails.data.content}</p>
         </div>
+        <button onClick={() => navigate(`/song/edit/${songDetails.data.id}`)}>
+          Edit Song
+        </button>
       </div>
     );
 }

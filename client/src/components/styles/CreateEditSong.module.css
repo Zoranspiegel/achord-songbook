@@ -1,7 +1,31 @@
-.form__container {
-  height: 100vh;
+.component__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  gap: 20px;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.form__title, .form__artist, .form__content {
+  width: 70vw;
+  border: 2px inset black;
+  border-radius: 10px;
+  outline: none;
+  background-color: #222;
+  padding: 10px;
+  color: var(--main-font-color);
+}
+
+.form__content {
+  resize: none;
+  min-height: 50vh;
 }
