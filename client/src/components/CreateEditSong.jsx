@@ -44,6 +44,7 @@ export default function CreateEditSong() {
         type='text'
         name='title'
         value={songState.title}
+        autoComplete="off"
       />
       <label>Artist Name</label>
       <input
@@ -51,13 +52,15 @@ export default function CreateEditSong() {
         type='text'
         name='artistName'
         value={songState.artistName}
+        autoComplete="off"
       />
       <label>Song</label>
-      <input
+      <textarea
         onChange={handleChange}
         type='text'
         name='content'
         value={songState.content}
+        autoComplete="off"
       />
       <input type='submit' value='Create' />
     </form>
