@@ -1,13 +1,15 @@
 const logUser = require('./logUser');
 const createSong = require('./createSong');
 const findOrCreateArtist = require('./findOrCreateArtist');
-const getArtists = require('./getArtists');
+const getUserArtists = require('./getUserArtists');
 const getUserSongs = require('./getUserSongs');
+const getSongDetails = require('./getSongDetails');
 
 module.exports = {
   logUser,
   createSong,
   findOrCreateArtist,
-  getArtists,
-  getUserSongs
+  getUserArtists,
+  getUserSongs,
+  getSongDetails
 };

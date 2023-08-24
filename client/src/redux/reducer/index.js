@@ -12,6 +12,10 @@ import {
   GET_USER_SONGS,
   GET_USER_SONGS_LOADING,
   GET_USER_SONGS_ERROR,
+  GET_SONG_DETAILS,
+  GET_SONG_DETAILS_LOADING,
+  GET_SONG_DETAILS_ERROR,
+  CLEAN_DETAILS
 } from '../actions';
 
 const initialState = {
@@ -32,6 +36,11 @@ const initialState = {
   },
   userSongs: {
     data: [],
+    status: 'idle',
+    error: null
+  },
+  songDetails: {
+    data: {},
     status: 'idle',
     error: null
   }
@@ -150,6 +159,38 @@ export default function reducer(state = initialState, action) {
           status: 'error',
           error: action.payload
         }
+      };
+    case GET_SONG_DETAILS_LOADING:
+      return {
+        ...state,
+        songDetails: {
+          data: {},
+          status: 'loading',
+          error: null
+        }
+      };
+    case GET_SONG_DETAILS:
+      return {
+        ...state,
+        songDetails: {
+          data: action.payload,
+          status: 'success',
+          error: null
+        }
+      };
+    case GET_SONG_DETAILS_ERROR:
+      return {
+        ...state,
+        songDetails: {
+          data: {},
+          status: 'error',
+          error: action.payload
+        }
+      };
+    case CLEAN_DETAILS:
+      return {
+        ...state,
+        songDetails: initialState.songDetails
       };
     default:
       return { ...state };

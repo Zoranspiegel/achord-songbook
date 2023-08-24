@@ -13,18 +13,25 @@
   border-radius: 10px;
   padding: 10px;
   transition: all 0.1s ease-in-out;
-  cursor: pointer;
+  cursor: url('../../assets/guitar-cursor.png'), auto;
 }
 
 .card__container:hover {
   transform: translateY(-5px);
 }
 
-.card__container h1 {
+.card__title {
   font-size: 1.5em;
   text-align: center;
+  cursor: inherit;
 }
-.card__container h2 {
+
+.card__artist {
   font-size: 1.1em;
   margin-bottom: 10px;
+  cursor: inherit;
+}
+
+.card__content {
+  cursor: inherit;
 }

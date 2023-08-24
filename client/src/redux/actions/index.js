@@ -17,6 +17,11 @@ export const GET_USER_SONGS = 'GET_USER_SONGS';
 export const GET_USER_SONGS_LOADING = 'GET_USER_SONGS_LOADING';
 export const GET_USER_SONGS_ERROR = 'GET_USER_SONGS_ERROR';
 
+export const GET_SONG_DETAILS = 'GET_SONG_DETAILS';
+export const GET_SONG_DETAILS_LOADING = 'GET_SONG_DETAILS_LOADING';
+export const GET_SONG_DETAILS_ERROR = 'GET_SONG_DETAILS_ERROR';
+export const CLEAN_DETAILS = 'CLEAN_DETAILS';
+
 export const logUser = (body) => (dispatch) => {
   // LOGGING_USER
   dispatch({ type: LOGGING_USER });
@@ -115,4 +120,26 @@ export const getUserSongs = (token) => (dispatch) => {
     .then(payload => dispatch({ type: GET_USER_SONGS, payload }))
     // GET_USER_SONGS_ERROR
     .catch(error => dispatch({ type: GET_USER_SONGS_ERROR, payload: error.message }));
+};
+
+export const getSongDetails = (id, token) => (dispatch) => {
+  // GET_SONG_DETAILS_LOADING
+  dispatch({ type: GET_SONG_DETAILS_LOADING });
+  fetch(`${VITE_SERVER_URL}/song/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error('Bad Request');
+      return res.json();
+    })
+    // GET_SONG_DETAILS
+    .then(payload => dispatch({ type: GET_SONG_DETAILS, payload }))
+    // GET_SONG_DETAILS_ERROR
+    .catch((error) => dispatch({ type: GET_SONG_DETAILS_ERROR, payload: error.message }));
+};
+
+export const cleanDetails = () => {
+  return { type: CLEAN_DETAILS };
 };

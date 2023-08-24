@@ -12,10 +12,10 @@ const initialSongState = {
 
 export default function CreateEditSong() {
   const dispatch = useDispatch();
-  const [songState, setSongState] = useState(initialSongState);
-  const token = useSelector((state) => state.loggedUser.data.token);
-  const { id } = useParams();
   const navigate = useNavigate();
+  const { id } = useParams();
+  const token = useSelector((state) => state.loggedUser.data.token);
+  const [songState, setSongState] = useState(initialSongState);
 
   useEffect(() => {
     console.log(id);

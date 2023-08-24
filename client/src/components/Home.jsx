@@ -14,7 +14,7 @@ export default function Home() {
       <img className={style.home__logo} src={logo} alt='A/Chord logo' />
       <User />
       {logged && <Songs />}
-      {logged && <button onClick={() => navigate('/song/new')}>New Song</button>}
+      {logged && <button onClick={() => navigate('/song/edit/new')}>New Song</button>}
     </div>
   );
 }

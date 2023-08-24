@@ -8,4 +8,6 @@ router.post('/', mdw.jwtVerify, ctr.createSong);
 
 router.get('/', mdw.jwtVerify, ctr.getUserSongs);
 
+router.get('/:id', mdw.jwtVerify, ctr.getSongDetails);
+
 module.exports = router;
