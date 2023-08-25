@@ -13,7 +13,7 @@
   border-radius: 10px;
   padding: 10px;
   transition: all 0.1s ease-in-out;
-  cursor: url('../../assets/guitar-cursor.png'), auto;
+  cursor: url('../../assets/pick-blue-cursor.png'), auto;
 }
 
 .card__container:hover {
