@@ -17,7 +17,7 @@
 }
 
 .card__container:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 10px 25px 0 rgba(255,255,255,0.4);
 }
 
 .card__title {
