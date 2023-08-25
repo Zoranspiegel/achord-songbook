@@ -17,10 +17,6 @@
   cursor: url('./assets/pick-cursor.png'), auto;
 }
 
-button {
-  cursor: url('./assets/pick-blue-cursor.png'), auto;
-}
-
 input[type="text"], textarea {
   cursor: auto;
 }

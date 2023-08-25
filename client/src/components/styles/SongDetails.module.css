@@ -13,9 +13,10 @@
   align-items: flex-start;
   width: 70vw;
   min-height: 70vh;
-  border: 2px inset black;
+  border: 2px outset black;
   border-radius: 20px;
-  background-color: #222;
+  background: linear-gradient(to top, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+  backdrop-filter: blur(1px);
   padding: 20px;
   margin: 20px;
 }

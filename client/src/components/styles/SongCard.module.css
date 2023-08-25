@@ -9,15 +9,14 @@
   border-top: 2px solid rgba(255,255,255,0.3);
   background: linear-gradient(135deg, rgba(255,255,255, 0.2), rgba(255,255,255, 0));
   backdrop-filter: blur(1.1px);
-  box-shadow: 0 8px 20px 0 rgba(255,255,255,0.2);
+  box-shadow: 0 0 10px 5px rgba(255,255,255, 0.1);
   border-radius: 10px;
   padding: 10px;
-  transition: all 0.1s ease-in-out;
-  cursor: url('../../assets/pick-blue-cursor.png'), auto;
+  transition: all 0.3s ease-in-out;
 }
 
 .card__container:hover {
-  box-shadow: 0 10px 25px 0 rgba(255,255,255,0.4);
+  box-shadow: 0 0 20px 8px rgba(155,0,0,0.4);
 }
 
 .card__title {
