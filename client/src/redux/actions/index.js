@@ -9,6 +9,11 @@ export const CREATE_SONG = 'CREATE_SONG';
 export const CREATE_SONG_LOADING = 'CREATE_SONG_LOADING';
 export const CREATE_SONG_ERROR = 'CREATE_SONG_ERROR';
 
+export const EDIT_SONG = 'EDIT_SONG';
+export const EDIT_SONG_LOADING = 'EDIT_SONG_LOADING';
+export const EDIT_SONG_ERROR = 'EDIT_SONG_ERROR';
+export const CLEAN_EDIT = 'CLEAN_EDIT';
+
 export const GET_USER_ARTISTS = 'GET_USER_ARTISTS';
 export const GET_USER_ARTISTS_LOADING = 'GET_USER_ARTISTS_LOADING';
 export const GET_USER_ARTISTS_ERROR = 'GET_USER_ARTISTS_ERROR';
@@ -51,14 +56,15 @@ export const logoutUser = () => {
 export const createSong = (body, token) => (dispatch) => {
   // CREATE_SONG_LOADING
   dispatch({ type: CREATE_SONG_LOADING });
-  const { artistName, ...rest } = body;
+  const { artist, ...rest } = body;
+  console.log(artist);
   fetch(`${VITE_SERVER_URL}/artist`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify({ artistName })
+    body: JSON.stringify({ artist })
   })
     .then(res => {
       if (!res.ok) throw new Error('Bad Request');
@@ -84,6 +90,49 @@ export const createSong = (body, token) => (dispatch) => {
     })
     // CREATE_SONG_ERROR
     .catch(error => dispatch({ type: CREATE_SONG_ERROR, payload: error.message }));
+};
+
+export const editSong = (id, body, token) => (dispatch) => {
+  const { artist, ...rest } = body;
+  // EDIT_SONG_LOADING
+  dispatch({ type: EDIT_SONG_LOADING });
+  fetch(`${VITE_SERVER_URL}/artist`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({ artist })
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error('Bad Request');
+      return res.json();
+    })
+    .then((artistId) => {
+      fetch(`${VITE_SERVER_URL}/song/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ ...rest, artistId })
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error('Bad Request');
+          return res.json();
+        })
+        // EDIT_SONG
+        .then((payload) => dispatch({ type: EDIT_SONG, payload }))
+        // EDIT_SONG_ERROR
+        .catch((error) => dispatch({ type: EDIT_SONG_ERROR, payload: error.message }));
+    })
+    // EDIT_SONG_ERROR
+    .catch((error) => dispatch({ type: EDIT_SONG_ERROR, payload: error.message }));
+};
+
+// CLEAN_EDIT
+export const cleanEdit = () => {
+  return { type: CLEAN_EDIT };
 };
 
 export const getArtists = (token) => (dispatch) => {
@@ -140,6 +189,7 @@ export const getSongDetails = (id, token) => (dispatch) => {
     .catch((error) => dispatch({ type: GET_SONG_DETAILS_ERROR, payload: error.message }));
 };
 
+// CLEAN_DETAILS
 export const cleanDetails = () => {
   return { type: CLEAN_DETAILS };
 };

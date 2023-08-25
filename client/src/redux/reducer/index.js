@@ -6,6 +6,10 @@ import {
   CREATE_SONG,
   CREATE_SONG_LOADING,
   CREATE_SONG_ERROR,
+  EDIT_SONG,
+  EDIT_SONG_LOADING,
+  EDIT_SONG_ERROR,
+  CLEAN_EDIT,
   GET_USER_ARTISTS,
   GET_USER_ARTISTS_LOADING,
   GET_USER_ARTISTS_ERROR,
@@ -25,6 +29,11 @@ const initialState = {
     error: null
   },
   newSong: {
+    id: null,
+    status: 'idle',
+    error: null
+  },
+  editedSong: {
     id: null,
     status: 'idle',
     error: null
@@ -105,6 +114,38 @@ export default function reducer(state = initialState, action) {
           status: 'error',
           error: action.payload
         }
+      };
+    case EDIT_SONG_LOADING:
+      return {
+        ...state,
+        editedSong: {
+          id: null,
+          status: 'loading',
+          error: null
+        }
+      };
+    case EDIT_SONG:
+      return {
+        ...state,
+        editedSong: {
+          id: action.payload,
+          status: 'success',
+          error: null
+        }
+      };
+    case EDIT_SONG_ERROR:
+      return {
+        ...state,
+        editedSong: {
+          id: null,
+          status: 'error',
+          error: action.payload
+        }
+      };
+    case CLEAN_EDIT:
+      return {
+        ...state,
+        editedSong: initialState.editedSong
       };
     case GET_USER_SONGS_LOADING:
       return {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createSong } from '../redux/actions';
+import { cleanEdit, createSong, editSong } from '../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
 import isUUID from '../utils/isUUID';
 import style from './styles/CreateEditSong.module.css';
@@ -17,6 +17,7 @@ export default function CreateEditSong() {
   const { id } = useParams();
   const token = useSelector((state) => state.loggedUser.data.token);
   const songDetails = useSelector((state) => state.songDetails);
+  const edited = useSelector((state) => state.editedSong.status);
   const [songState, setSongState] = useState(initialSongState);
 
   useEffect(() => {
@@ -34,10 +35,20 @@ export default function CreateEditSong() {
     });
   };
 
+  useEffect(() => {
+    if (edited === 'success') navigate(`/song/details/${id}`);
+    return () => {
+      if (edited === 'success') dispatch(cleanEdit());
+    };
+  }, [edited]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (songDetails.status === 'success') {
       console.log('Song update under develop');
+      dispatch(editSong(id, songState, token));
+      setSongState(initialSongState);
+      localStorage.setItem('fetchGate', false);
     }
     if (songDetails.status === 'idle') {
       dispatch(createSong(songState, token));
@@ -47,6 +58,7 @@ export default function CreateEditSong() {
     }
   };
 
+  if (edited === 'error') return <h1>Oops, something went wrong</h1>;
   return (
     <div className={style.component__container}>
       <button onClick={() => navigate('/')}>Home</button>

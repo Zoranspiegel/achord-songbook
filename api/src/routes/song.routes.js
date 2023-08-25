@@ -10,4 +10,6 @@ router.get('/', mdw.jwtVerify, ctr.getUserSongs);
 
 router.get('/:id', mdw.jwtVerify, ctr.getSongDetails);
 
+router.put('/:id', mdw.jwtVerify, ctr.updateSong);
+
 module.exports = router;

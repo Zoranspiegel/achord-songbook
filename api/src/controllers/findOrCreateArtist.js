@@ -2,12 +2,11 @@ const { artist } = require('../db');
 
 module.exports = async (req, res) => {
   try {
-    const { artistName, ...rest } = req.body;
     const [foundOrCreatedArtist, created] = await artist.findOrCreate({
       where: {
-        name: artistName
+        name: req.body.artist
       },
-      defaults: rest
+      defaults: req.body
     });
     if (created) {
       await foundOrCreatedArtist.setUser(req.authData.id);
