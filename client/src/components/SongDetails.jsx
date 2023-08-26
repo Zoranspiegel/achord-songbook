@@ -37,7 +37,7 @@ export default function SongDetails() {
                   {line.split(/\s/).map((word) => {
                     if (isChord(word))
                       return (
-                        <span className={style.content__chord}>
+                        <span className={style.content__chord} key={anyHash()}>
                           {word}&nbsp;
                         </span>
                       );

@@ -15,20 +15,17 @@
   align-items: flex-start;
   width: 70vw;
   height: 87vh;
-  overflow-y: scroll;
   border: 2px outset black;
   border-radius: 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,1));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1));
   backdrop-filter: blur(1px);
   padding: 20px;
   margin: 20px;
 }
 
-.details__plate::-webkit-scrollbar {
-  display: none;
-}
-
-.details__title, .details__artist, .details__content {
+.details__title,
+.details__artist,
+.details__content {
   cursor: auto;
 }
 
@@ -36,10 +33,66 @@
   margin-top: 30px;
   white-space: pre-line;
   font-size: 1.2em;
-  cursor:text;
+  cursor: text;
 }
 
 .content__chord {
   color: yellow;
   cursor: url('../../assets/pick-blue-cursor.png'), auto;
+}
+
+@media screen and (max-width: 412px) {
+  .details__container {
+    align-items: flex-start;
+    overflow-x: hidden;
+  }
+  .details__plate {
+    padding: inherit 0;
+    margin: 0;
+    width: 50vw;
+  }
+  .details__title {
+    font-size: 6.5vw;
+  }
+  .details__artist {
+    font-size: 5vw;
+  }
+  .details__content {
+    font-size: 3vw;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .details__container {
+    padding: 0;
+  }
+  .details__plate {
+    width: 410px;
+  }  
+}
+
+@media screen and (max-width: 1046px) {
+  .details__plate {
+    overflow-y: scroll;
+  }
+
+  .details__plate::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1046px) {
+  .details__content {
+    height: 90%;
+    column-count: 2;
+    column-fill: auto;
+  }
+}
+
+@media screen and (min-width: 1496px) {
+  .details__content {
+    height: 90%;
+    column-count: 3;
+    column-fill: auto;
+  }
 }
