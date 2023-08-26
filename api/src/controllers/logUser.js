@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
         res.status(201).json({ ...newUser.dataValues, token });
       });
     } else {
-      jwt.sign({ ...foundUsers[0] }, JWT_SECRET, (error, token) => {
+      jwt.sign({ id: foundUsers[0].id }, JWT_SECRET, (error, token) => {
         if (error) return res.sendStatus(403);
         res.status(200).json({ ...foundUsers[0].dataValues, token });
       });
