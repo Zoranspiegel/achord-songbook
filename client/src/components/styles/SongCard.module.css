@@ -16,7 +16,7 @@
 }
 
 .card__container:hover {
-  box-shadow: 0 0 20px 8px rgba(155,0,0,0.4);
+  box-shadow: 0 0 20px 8px rgba(155, 127, 0, 0.4);
 }
 
 .card__padding {

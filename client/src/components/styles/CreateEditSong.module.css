@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  padding-top: 20px;
   gap: 20px;
 }
 
@@ -27,5 +27,5 @@
 
 .form__content {
   resize: none;
-  min-height: 70vh;
+  min-height: 67vh;
 }
