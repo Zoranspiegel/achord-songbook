@@ -15,3 +15,9 @@
   border: 3px ridge black;
   border-style: inset;
 }
+
+@media screen and (max-width: 1200px) {
+  .home__logo {
+    width: 242px;
+  }
+}
