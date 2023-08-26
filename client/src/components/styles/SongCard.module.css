@@ -19,6 +19,14 @@
   box-shadow: 0 0 20px 8px rgba(155,0,0,0.4);
 }
 
+.card__padding {
+  overflow-y: scroll;
+}
+
+.card__padding::-webkit-scrollbar {
+  display: none;
+}
+
 .card__title {
   font-size: 1.5em;
   text-align: center;
@@ -27,11 +35,12 @@
 
 .card__artist {
   font-size: 1.1em;
-  margin-bottom: 10px;
+  text-align: center;
   cursor: inherit;
 }
 
 .card__content {
+  margin-top: 10px;
   white-space: pre-line;
   cursor: inherit;
 }

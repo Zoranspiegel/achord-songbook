@@ -11,9 +11,11 @@ export default function SongCard({ song }) {
     >
       <Tilt glareEnable='true' glareBorderRadius='10px'>
         <div className={style.card__container}>
-          <h1 className={style.card__title}>{song.title}</h1>
-          <h2 className={style.card__artist}>{song.artist}</h2>
-          <p className={style.card__content}>{song.content.slice(0, 190)}...</p>
+          <div className={style.card__padding}>
+            <h1 className={style.card__title}>{song.title}</h1>
+            <h2 className={style.card__artist}>{song.artist}</h2>
+            <p className={style.card__content}>{song.content}</p>
+          </div>
         </div>
       </Tilt>
     </NavLink>

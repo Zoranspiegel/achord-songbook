@@ -4,21 +4,28 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px 0;
 }
 
 .details__plate {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   width: 70vw;
-  min-height: 70vh;
+  height: 87vh;
+  overflow-y: scroll;
   border: 2px outset black;
   border-radius: 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+  background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,1));
   backdrop-filter: blur(1px);
   padding: 20px;
   margin: 20px;
+}
+
+.details__plate::-webkit-scrollbar {
+  display: none;
 }
 
 .details__title, .details__artist, .details__content {
