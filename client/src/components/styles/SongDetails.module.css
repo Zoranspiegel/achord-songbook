@@ -27,4 +27,12 @@
 
 .details__content {
   margin-top: 30px;
+  white-space: pre-line;
+  font-size: 1.2em;
+  cursor:text;
+}
+
+.content__chord {
+  color: yellow;
+  cursor: url('../../assets/pick-blue-cursor.png'), auto;
 }

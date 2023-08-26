@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSongDetails } from '../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
 import isUUID from '../utils/isUUID';
+import isChord from '../utils/isChord';
+import anyHash from '../utils/anyHash';
 import style from './styles/SongDetails.module.css';
 
 export default function SongDetails() {
@@ -28,7 +30,24 @@ export default function SongDetails() {
         <div className={style.details__plate}>
           <h1 className={style.details__title}>{songDetails.data.title}</h1>
           <h2 className={style.details__artist}>{songDetails.data.artist}</h2>
-          <p className={style.details__content}>{songDetails.data.content}</p>
+          <p className={style.details__content}>
+            {songDetails.data.content.split(/\n/).map((line) => {
+              return (
+                <Fragment key={anyHash()}>
+                  {line.split(/\s/).map((word) => {
+                    if (isChord(word))
+                      return (
+                        <span className={style.content__chord}>
+                          {word}&nbsp;
+                        </span>
+                      );
+                    return <Fragment key={anyHash()}>{word}&nbsp;</Fragment>;
+                  })}
+                  {'\n'}
+                </Fragment>
+              );
+            })}
+          </p>
         </div>
         <button onClick={() => navigate(`/song/edit/${songDetails.data.id}`)}>
           Edit Song
