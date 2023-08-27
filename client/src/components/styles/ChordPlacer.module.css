@@ -1,0 +1,51 @@
+.chordplacer__container {
+  position: relative;
+  display: inline;
+}
+
+.chordplacer__chord {
+  color: rgb(243, 199, 4);
+  cursor: url('../../assets/pick-blue-cursor.png'), auto;
+}
+
+.chordplacer__chord_active {
+  color: rgb(30, 130, 255);
+}
+
+.chordplacer__form {
+  display: flex;
+  position: absolute;
+  bottom: 1em;
+  left: 0.7em;
+  border-radius: 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 2px;
+  gap: 3px;
+  backdrop-filter: blur(3px);
+  z-index: 100;
+}
+
+.form__input {
+  outline: none;
+  width: 4em;
+  height: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.form__submit {
+  height: 20px;
+  width: 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(180, 0, 0);
+  font-size: 1.2em;
+  color: rgb(70, 0, 0);
+}
+
+.form__submit:disabled {
+  background-color: rgba(155, 155, 155, 0.7);
+  color: rgba(100, 100, 100, 0.7);
+}

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { cleanEdit, createSong, editSong } from '../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
 import isUUID from '../utils/isUUID';
+import MainButton from './MainButton';
 import style from './styles/CreateEditSong.module.css';
 
 const initialSongState = {
@@ -61,7 +62,7 @@ export default function CreateEditSong() {
   if (edited === 'error') return <h1>Oops, something went wrong</h1>;
   return (
     <div className={style.component__container}>
-      <button onClick={() => navigate('/')}>Home</button>
+      <MainButton onClick={() => navigate('/')}>Home</MainButton>
       <form onSubmit={handleSubmit} className={style.form__container}>
         <label>Song Title</label>
         <input
@@ -90,10 +91,7 @@ export default function CreateEditSong() {
           autoComplete='off'
           className={style.form__content}
         />
-        <input
-          type='submit'
-          value={songDetails.status === 'success' ? 'Update' : 'Create'}
-        />
+        <MainButton type='submit'>{songDetails.status === 'success' ? 'Update' : 'Create'}</MainButton>
       </form>
     </div>
   );

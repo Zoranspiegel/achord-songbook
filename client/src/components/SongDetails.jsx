@@ -2,9 +2,11 @@ import { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSongDetails } from '../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
+import ChordPlacer from './ChordPlacer';
 import isUUID from '../utils/isUUID';
 import isChord from '../utils/isChord';
 import anyHash from '../utils/anyHash';
+import MainButton from './MainButton';
 import style from './styles/SongDetails.module.css';
 
 export default function SongDetails() {
@@ -26,32 +28,27 @@ export default function SongDetails() {
   if (songDetails.status === 'success')
     return (
       <div className={style.details__container}>
-        <button onClick={() => navigate('/')}>Home</button>
+        <MainButton onClick={() => navigate('/')}>Home</MainButton>
         <div className={style.details__plate}>
           <h1 className={style.details__title}>{songDetails.data.title}</h1>
           <h2 className={style.details__artist}>{songDetails.data.artist}</h2>
-          <p className={style.details__content}>
+          <div className={style.details__content}>
             {songDetails.data.content.split(/\n/).map((line) => {
               return (
                 <Fragment key={anyHash()}>
                   {line.split(/\s/).map((word) => {
-                    if (isChord(word))
-                      return (
-                        <span className={style.content__chord} key={anyHash()}>
-                          {word}&nbsp;
-                        </span>
-                      );
+                    if (isChord(word)) return <ChordPlacer key={anyHash()} name={word} />;
                     return <Fragment key={anyHash()}>{word}&nbsp;</Fragment>;
                   })}
                   {'\n'}
                 </Fragment>
               );
             })}
-          </p>
+          </div>
         </div>
-        <button onClick={() => navigate(`/song/edit/${songDetails.data.id}`)}>
+        <MainButton onClick={() => navigate(`/song/edit/${songDetails.data.id}`)}>
           Edit Song
-        </button>
+        </MainButton>
       </div>
     );
 }

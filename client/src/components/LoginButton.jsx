@@ -1,4 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
+import MainButton from './MainButton';
 
 export default function LoginButton() {
   const { loginWithRedirect } = useAuth0();
@@ -7,5 +8,5 @@ export default function LoginButton() {
     loginWithRedirect();
   };
 
-  return <button onClick={handleLogin}>Login</button>;
+  return <MainButton onClick={handleLogin}>Login</MainButton>;
 }

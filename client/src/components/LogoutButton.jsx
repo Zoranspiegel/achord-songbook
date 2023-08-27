@@ -1,4 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
+import MainButton from './MainButton';
 
 export default function LogoutButton() {
   const { logout } = useAuth0();
@@ -7,5 +8,5 @@ export default function LogoutButton() {
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return <MainButton onClick={handleLogout}>Logout</MainButton>;
 }

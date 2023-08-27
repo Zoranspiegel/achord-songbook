@@ -5,6 +5,7 @@ import { cleanDetails } from '../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import User from './User';
 import Songs from './Songs';
+import MainButton from './MainButton';
 import style from './styles/Home.module.css';
 
 export default function Home() {
@@ -21,7 +22,7 @@ export default function Home() {
       <img className={style.home__logo} src={logo} alt='A/Chord logo' />
       <User />
       {logged && <Songs />}
-      {logged && <button onClick={() => navigate('/song/edit/new')}>New Song</button>}
+      {logged && <MainButton onClick={() => navigate('/song/edit/new')}>New Song</MainButton>}
     </div>
   );
 }

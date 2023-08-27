@@ -40,11 +40,6 @@
   cursor: text;
 }
 
-.content__chord {
-  color: rgb(243, 199, 4);
-  cursor: url('../../assets/pick-blue-cursor.png'), auto;
-}
-
 @media screen and (max-width: 412px) {
   .details__container {
     align-items: flex-start;
@@ -97,6 +92,7 @@
   .details__content {
     height: 90%;
     column-count: 3;
+    column-gap: 40px;
     column-fill: auto;
   }
 }
