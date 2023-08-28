@@ -8,6 +8,7 @@ export default function ChordPlacer({ name, chord, index, editSongChord }) {
   const [visibilityState, setVisibilityState] = useState(false);
   const [inputState, setInputState] = useState('');
   const [chordState, setChordState] = useState(chord ? chord : '');
+  const [deleteState, setDeleteState] = useState(false);
 
   // INPUT_FOCUS_ON_RENDER
   useEffect(() => {
@@ -34,9 +35,23 @@ export default function ChordPlacer({ name, chord, index, editSongChord }) {
     setInputState('');
   };
 
+  // HANDLE_DELETE
+  const handleChordStateDelete = () => {
+    editSongChord(index, '');
+    setChordState('');
+    setInputState('');
+  };
+
   return (
     <div className={style.chordplacer__container}>
-      <span onClick={handleVisibility} className={visibilityState ? style.chordplacer__chord_active : style.chordplacer__chord} >
+      <span
+        onClick={handleVisibility}
+        className={
+          visibilityState
+            ? style.chordplacer__chord_active
+            : style.chordplacer__chord
+        }
+      >
         {name}&nbsp;
       </span>
       {!chordState && visibilityState && (
@@ -52,11 +67,32 @@ export default function ChordPlacer({ name, chord, index, editSongChord }) {
             value={inputState}
             onChange={handleInputStateChange}
           />
-          <button className={style.form__submit} type="submit" disabled={!/[0-9x]{6}$/.test(inputState)} >&#9834;</button>
+          <button
+            className={style.form__submit}
+            type='submit'
+            disabled={!/[0-9x]{6}$/.test(inputState)}
+          >
+            &#9834;
+          </button>
         </form>
       )}
       {chordState && visibilityState && (
-        <Chord name={name} chord={chordState} />
+        <div className={style.scheme__container}>
+          <Chord name={name} chord={chordState} />
+          <button
+            className={style.delete__button}
+            onClick={() => setDeleteState(true)}
+          >
+            &#128465;
+          </button>
+          {deleteState && (
+            <div className={style.delete__panel}>
+              <span className={style.delete__message}>Sure?</span>
+              <button className={style.delete__confirmation} onClick={handleChordStateDelete}>&#10003;</button>
+              <button className={style.delete__rejection} onClick={() => setDeleteState(false)}>X</button>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
@@ -66,5 +102,5 @@ ChordPlacer.propTypes = {
   name: PropTypes.string.isRequired,
   chord: PropTypes.string.isRequired,
   index: PropTypes.object.isRequired,
-  editSongChord: PropTypes.func.isRequired
+  editSongChord: PropTypes.func.isRequired,
 };

@@ -49,3 +49,81 @@
   background-color: rgba(155, 155, 155, 0.7);
   color: rgba(100, 100, 100, 0.7);
 }
+.scheme__container {
+  display: inline;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.delete__button {
+  position: absolute;
+  bottom: 20px;
+  left: 5.2vw;
+  color: red;
+  background-color: transparent;
+  border: none;
+  font-size: 1.3vw;
+}
+
+.delete__panel {
+  position: absolute;
+  z-index: 200;
+  bottom: 30px;
+  left: 1vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 6.4vw;
+  border-radius: 10px;
+  border-top: 1px solid rgba(200, 200, 200, 0.5);
+  border-left: 1px solid rgba(200, 200, 200, 0.5);
+  background-color: grey;
+  box-shadow: 5px 5px 10px black;
+  padding: 10px;
+}
+
+.delete__message {
+  font-size: 1vw;
+  color: #f5f5f5;
+}
+
+.delete__confirmation, .delete__rejection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1vw;
+  height: 1vw;
+  border-radius: 5px;
+  border: none;
+  font-size: 0.8vw;
+  text-align: center;
+}
+
+.delete__confirmation {
+  background-color: green;
+}
+.delete__rejection {
+  background-color: red;
+}
+
+@media screen and (max-width: 1250px) {
+  .delete__button {
+    left: 60px;
+    font-size: 1em;
+  }
+
+  .delete__panel {
+    width: 80px;
+  }
+
+  .delete__message {
+    font-size: 0.85em;
+  }
+
+  .delete__confirmation, .delete__rejection {
+    width: 15px;
+    height: 15px;
+    font-size: 0.7em;
+  }
+}
