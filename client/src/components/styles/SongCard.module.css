@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
-  width: 200px;
+  align-items: flex-start;
+  width: 260px;
   height: 250px;
   border-left: 2px solid rgba(255,255,255,0.3);
   border-top: 2px solid rgba(255,255,255,0.3);
@@ -28,19 +28,25 @@
 }
 
 .card__title {
-  font-size: 1.5em;
-  text-align: center;
+  font-size: 1.4em;
   cursor: inherit;
 }
 
 .card__artist {
-  font-size: 1.1em;
-  text-align: center;
+  font-size: 1em;
   cursor: inherit;
+}
+
+.content__shell {
+  display: flex;
+  align-self: flex-start;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .card__content {
   margin-top: 10px;
   white-space: pre-line;
+  font-size: 0.7em;
   cursor: inherit;
 }

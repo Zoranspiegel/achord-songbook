@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { cleanEdit, createSong, editSong } from '../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
-import isChord from '../utils/isChord';
 import isUUID from '../utils/isUUID';
 import MainButton from './MainButton';
 import style from './styles/CreateEditSong.module.css';
@@ -25,24 +24,8 @@ export default function CreateEditSong() {
   // EDITION_STATE_SETTING
   useEffect(() => {
     if (isUUID(id) && songDetails.status === 'success') {
-      const cacheChords = [];
-      const editState = {
-        ...songDetails.data,
-        content: songDetails.data.content.split(/\n/).map((line) => {
-          return line.split(/\s/).map((word) => {
-            if (/^%.+%$/.test(word)) {
-              const cacheChord = {
-                chord: word.split('%')[1].split('-')[0],
-                scheme: word.split('%')[1].split('-')[1]
-              };
-              cacheChords.push(cacheChord);
-              return cacheChord.chord;
-            }
-            return word;
-          }).join(' ');
-        }).join('\n')
-      };
-      localStorage.setItem('cacheChords', JSON.stringify(cacheChords));
+      const { title, artist, content } = songDetails.data;
+      const editState = { title, artist, content };
       setSongState(editState);
     }
   }, []);
@@ -66,45 +49,14 @@ export default function CreateEditSong() {
   // HANDLE_SUBMIT
   const handleSubmit = (e) => {
     e.preventDefault();
-    // EDIT_SONG
     if (songDetails.status === 'success') {
-      const body = {
-        ...songState,
-        content: songState.content.split(/\n/).map((line) => {
-          return line.split(/\s/).map((word) => {
-            if (isChord(word)) {
-              const cacheChords = JSON.parse(localStorage.getItem('cacheChords'));
-              const index = cacheChords.findIndex(item => item.chord === word);
-              if (index >= 0) {
-                const scheme = { ...cacheChords[index] }.scheme;
-                cacheChords.splice(index, 1);
-                localStorage.setItem('cacheChords', JSON.stringify(cacheChords));
-                return `%${word}-${scheme}%`;
-              }
-              return `%${word}-%`;
-            }
-            return word;
-          }).join(' ');
-        }).join('\n'),
-      };
-      dispatch(editSong(id, body, token));
+      console.log('Song update under develop');
+      dispatch(editSong(id, songState, token));
       setSongState(initialSongState);
-      localStorage.removeItem('cacheChords');
       localStorage.setItem('fetchGate', false);
     }
-    
-    // CREATE_SONG
     if (songDetails.status === 'idle') {
-      const body = {
-        ...songState,
-        content: songState.content.split(/\n/).map((line) => {
-          return line.split(/\s/).map((word) => {
-            if (isChord(word)) return `%${word}-%`;
-            return word;
-          }).join(' ');
-        }).join('\n')
-      };
-      dispatch(createSong(body, token));
+      dispatch(createSong(songState, token));
       setSongState(initialSongState);
       localStorage.setItem('fetchGate', false);
       navigate('/');
@@ -143,9 +95,7 @@ export default function CreateEditSong() {
           autoComplete='off'
           className={style.form__content}
         />
-        <MainButton type='submit'>
-          {songDetails.status === 'success' ? 'Update' : 'Create'}
-        </MainButton>
+        <MainButton type='submit'>{songDetails.status === 'success' ? 'Update' : 'Create'}</MainButton>
       </form>
     </div>
   );

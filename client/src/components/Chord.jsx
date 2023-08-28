@@ -133,7 +133,7 @@ export default function Chord({ name, chord }) {
             XMARGIN + STRS_SPACE * string,
             YMARGIN +
               TOP_PADDING +
-              FRETS_SPACE * (fret - MIN_FRET) +
+              FRETS_SPACE * (fret - (FIRST_POSITION ? 1 : MIN_FRET)) +
               FRETS_SPACE / 2,
             NOTE_RADIUS,
             0,
@@ -164,13 +164,15 @@ export default function Chord({ name, chord }) {
           XMARGIN + STRS_SPACE * initialPosition,
           YMARGIN +
             TOP_PADDING +
-            (FRETS_SPACE * (barFret - MIN_FRET) + FRETS_SPACE * 0.5)
+            (FRETS_SPACE * (barFret - (FIRST_POSITION ? 1 : MIN_FRET)) +
+              FRETS_SPACE * 0.5)
         );
         ctx.lineTo(
           XMARGIN + STRS_SPACE * finalPosition,
           YMARGIN +
             TOP_PADDING +
-            (FRETS_SPACE * (barFret - MIN_FRET) + FRETS_SPACE * 0.5)
+            (FRETS_SPACE * (barFret - (FIRST_POSITION ? 1 : MIN_FRET)) +
+              FRETS_SPACE * 0.5)
         );
         ctx.stroke();
         ctx.closePath();
@@ -178,13 +180,13 @@ export default function Chord({ name, chord }) {
     }
     drawChord();
     window.addEventListener('resize', drawChord);
-    console.log('NAME: ', name, 'CHORD: ', chord);
+    // console.log('NAME: ', name, 'CHORD: ', chord);
   }, [chord, name]);
 
   return (
-      <div className={style.chord__container}>
-        <canvas className={style.chord__canvas} ref={canvas}></canvas>
-      </div>
+    <div className={style.chord__container}>
+      <canvas className={style.chord__canvas} ref={canvas}></canvas>
+    </div>
   );
 }
 
