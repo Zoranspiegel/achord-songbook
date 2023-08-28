@@ -21,6 +21,7 @@ export default function CreateEditSong() {
   const edited = useSelector((state) => state.editedSong.status);
   const [songState, setSongState] = useState(initialSongState);
 
+  // EDITION_STATE_SETTING
   useEffect(() => {
     if (isUUID(id) && songDetails.status === 'success') {
       const { title, artist, content } = songDetails.data;
@@ -29,6 +30,7 @@ export default function CreateEditSong() {
     }
   }, []);
 
+  // HANDLE_CHANGE
   const handleChange = (e) => {
     setSongState({
       ...songState,
@@ -36,6 +38,7 @@ export default function CreateEditSong() {
     });
   };
 
+  // NAVIGATION_&_CLEANING
   useEffect(() => {
     if (edited === 'success') navigate(`/song/details/${id}`);
     return () => {
@@ -43,6 +46,7 @@ export default function CreateEditSong() {
     };
   }, [edited]);
 
+  // HANDLE_SUBMIT
   const handleSubmit = (e) => {
     e.preventDefault();
     if (songDetails.status === 'success') {
