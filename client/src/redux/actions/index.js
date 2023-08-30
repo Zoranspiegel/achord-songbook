@@ -27,6 +27,10 @@ export const GET_SONG_DETAILS_LOADING = 'GET_SONG_DETAILS_LOADING';
 export const GET_SONG_DETAILS_ERROR = 'GET_SONG_DETAILS_ERROR';
 export const CLEAN_DETAILS = 'CLEAN_DETAILS';
 
+export const DELETE_SONG = 'DELETE_SONG';
+export const DELETE_SONG_LOADING = 'DELETE_SONG_LOADING';
+export const DELETE_SONG_ERROR = 'DELETE_SONG_ERROR';
+
 export const logUser = (body) => (dispatch) => {
   // LOGGING_USER
   dispatch({ type: LOGGING_USER });
@@ -192,4 +196,24 @@ export const getSongDetails = (id, token) => (dispatch) => {
 // CLEAN_DETAILS
 export const cleanDetails = () => {
   return { type: CLEAN_DETAILS };
+};
+
+export const deleteSong = (id, token) => (dispatch) => {
+  // DELETE_SONG_LOADING
+  dispatch({ type: DELETE_SONG });
+  fetch(`${VITE_SERVER_URL}/song/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(res => {
+      if (!res.ok) throw new Error('Bad Request');
+      return res.json();
+    })
+    // DELETE_SONG
+    .then(payload => dispatch({ type: DELETE_SONG, payload }))
+    // DELETE_SONG_ERROR
+    .catch(error => dispatch({ type: DELETE_SONG_ERROR, payload: error.message }));
 };

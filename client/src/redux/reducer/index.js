@@ -19,7 +19,10 @@ import {
   GET_SONG_DETAILS,
   GET_SONG_DETAILS_LOADING,
   GET_SONG_DETAILS_ERROR,
-  CLEAN_DETAILS
+  CLEAN_DETAILS,
+  DELETE_SONG,
+  DELETE_SONG_LOADING,
+  DELETE_SONG_ERROR
 } from '../actions';
 
 const initialState = {
@@ -50,6 +53,11 @@ const initialState = {
   },
   songDetails: {
     data: {},
+    status: 'idle',
+    error: null
+  },
+  deletedSong: {
+    id: null,
     status: 'idle',
     error: null
   }
@@ -232,6 +240,33 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         songDetails: initialState.songDetails
+      };
+    case DELETE_SONG_LOADING:
+      return {
+        ...state,
+        deletedSong: {
+          id: null,
+          status: 'loading',
+          error: null
+        }
+      };
+    case DELETE_SONG:
+      return {
+        ...state,
+        deletedSong: {
+          id: action.payload,
+          status: 'loading',
+          error: null
+        }
+      };
+    case DELETE_SONG_ERROR:
+      return {
+        ...state,
+        deletedSong: {
+          id: null,
+          status: 'error',
+          error: action.payload
+        }
       };
     default:
       return { ...state };

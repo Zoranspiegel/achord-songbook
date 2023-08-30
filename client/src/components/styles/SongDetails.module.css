@@ -23,6 +23,60 @@
   margin: 10px;
 }
 
+.details__delete {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.delete__background {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 20px;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(1.5px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.delete__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 10px;
+  border: 2px outset rgba(255,255,255,0.5);
+  background-color: grey;
+  padding: 10px;
+}
+
+.delete__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.delete__confirm, .delete__reject {
+  border-radius: 5px;
+  width: 2vw;
+}
+
+.delete__confirm {
+  background-color: green;
+}
+
+.delete__reject {
+  background-color: red;
+}
+
 .details__title {
   text-shadow: 3px 3px #a6933f;
 }
