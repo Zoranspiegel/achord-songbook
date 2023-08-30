@@ -15,5 +15,5 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(5000),
       allowNull: false
     }
-  });
+  }, { paranoid: true });
 };
