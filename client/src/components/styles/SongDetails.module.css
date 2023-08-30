@@ -104,6 +104,11 @@
     margin: 0;
     width: 50vw;
   }
+
+  .delete__panel {
+    transform: translateX(-10vw);
+  }
+
   .details__title {
     font-size: 6.5vw;
   }
@@ -131,6 +136,10 @@
 
   .details__plate::-webkit-scrollbar {
     display: none;
+  }
+
+  .delete__confirm, .delete__reject {
+    width: 22px;
   }
 }
 

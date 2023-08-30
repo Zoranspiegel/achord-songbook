@@ -21,10 +21,10 @@ export default function Chord({ name, chord }) {
 
     function drawChord() {
       if (window.innerWidth >= 1250) {
-        CANVAS.width = window.innerWidth * 0.06;
+        CANVAS.width = window.innerWidth * 0.05;
         CANVAS.height = CANVAS.width;
       } else {
-        CANVAS.width = 70;
+        CANVAS.width = 60;
         CANVAS.height = CANVAS.width;
       }
 
