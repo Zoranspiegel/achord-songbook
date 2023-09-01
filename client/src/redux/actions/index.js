@@ -22,6 +22,9 @@ export const GET_USER_SONGS = 'GET_USER_SONGS';
 export const GET_USER_SONGS_LOADING = 'GET_USER_SONGS_LOADING';
 export const GET_USER_SONGS_ERROR = 'GET_USER_SONGS_ERROR';
 
+export const OPEN_FETCH_GATE = 'OPEN_FETCH_GATE';
+export const CLOSE_FETCH_GATE = 'CLOSE_FETCH_GATE';
+
 export const GET_SONG_DETAILS = 'GET_SONG_DETAILS';
 export const GET_SONG_DETAILS_LOADING = 'GET_SONG_DETAILS_LOADING';
 export const GET_SONG_DETAILS_ERROR = 'GET_SONG_DETAILS_ERROR';
@@ -53,7 +56,6 @@ export const logUser = (body) => (dispatch) => {
 
 // LOG_OUT_USER
 export const logoutUser = () => {
-  localStorage.removeItem('fetchGate');
   return { type: LOG_OUT_USER };
 };
 
@@ -173,6 +175,16 @@ export const getUserSongs = (token) => (dispatch) => {
     .then(payload => dispatch({ type: GET_USER_SONGS, payload }))
     // GET_USER_SONGS_ERROR
     .catch(error => dispatch({ type: GET_USER_SONGS_ERROR, payload: error.message }));
+};
+
+// OPEN_FETCH_GATE
+export const openFetchGate = () => {
+  return { type: OPEN_FETCH_GATE };
+};
+
+// CLOSE_FETCH_GATE
+export const closeFetchGate = () => {
+  return { type: CLOSE_FETCH_GATE };
 };
 
 export const getSongDetails = (id, token) => (dispatch) => {

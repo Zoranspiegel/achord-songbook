@@ -1,6 +1,6 @@
 import { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSongDetails, editSong, deleteSong } from '../redux/actions';
+import { getSongDetails, editSong, deleteSong, openFetchGate } from '../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
 import ChordPlacer from './ChordPlacer';
 import isUUID from '../utils/isUUID';
@@ -48,13 +48,13 @@ export default function SongDetails() {
         .join('\n'),
     };
     dispatch(editSong(id, body, token));
-    localStorage.setItem('fetchGate', false);
+    dispatch(openFetchGate());
   };
 
   // HANDLE_DELETE
   const handleDelete = () => {
     dispatch(deleteSong(id, token));
-    localStorage.setItem('fetchGate', false);
+    dispatch(openFetchGate());
     navigate('/');
   };
 

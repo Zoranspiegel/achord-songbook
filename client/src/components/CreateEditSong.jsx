@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { cleanEdit, createSong, editSong } from '../redux/actions';
+import { cleanEdit, createSong, editSong, openFetchGate } from '../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
 import isChord from '../utils/isChord';
 import isUUID from '../utils/isUUID';
@@ -90,7 +90,7 @@ export default function CreateEditSong() {
       dispatch(editSong(id, body, token));
       setSongState(initialSongState);
       localStorage.removeItem('cacheChords');
-      localStorage.setItem('fetchGate', false);
+      dispatch(openFetchGate());
     }
     
     // CREATE_SONG
@@ -106,7 +106,7 @@ export default function CreateEditSong() {
       };
       dispatch(createSong(body, token));
       setSongState(initialSongState);
-      localStorage.setItem('fetchGate', false);
+      dispatch(openFetchGate());
       navigate('/');
     }
   };

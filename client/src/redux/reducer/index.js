@@ -16,6 +16,8 @@ import {
   GET_USER_SONGS,
   GET_USER_SONGS_LOADING,
   GET_USER_SONGS_ERROR,
+  OPEN_FETCH_GATE,
+  CLOSE_FETCH_GATE,
   GET_SONG_DETAILS,
   GET_SONG_DETAILS_LOADING,
   GET_SONG_DETAILS_ERROR,
@@ -51,6 +53,7 @@ const initialState = {
     status: 'idle',
     error: null
   },
+  fetchGate: true,
   songDetails: {
     data: {},
     status: 'idle',
@@ -209,6 +212,10 @@ export default function reducer(state = initialState, action) {
           error: action.payload
         }
       };
+    case OPEN_FETCH_GATE:
+      return { ...state, fetchGate: true };
+    case CLOSE_FETCH_GATE:
+      return { ...state, fetchGate: false };
     case GET_SONG_DETAILS_LOADING:
       return {
         ...state,
