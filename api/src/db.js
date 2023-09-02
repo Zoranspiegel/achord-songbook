@@ -1,9 +1,9 @@
 const { Sequelize } = require('sequelize');
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const { DB_RAILWAY } = process.env;
 const fs = require('fs');
 const path = require('path');
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/song_book`, {
+const sequelize = new Sequelize(DB_RAILWAY, {
   native: false,
   logging: false
 });
