@@ -26,7 +26,7 @@ export default function Songs() {
 
   return (
     <div className={style.songs__container}>
-      {userSongs?.slice(0, 6).map((song) => (
+      {userSongs?.slice(0, 8).map((song) => (
         <SongCard key={anyHash()} song={song} />
       ))}
     </div>
