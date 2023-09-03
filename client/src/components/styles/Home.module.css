@@ -10,7 +10,7 @@
 }
 
 .home__logo {
-  width: 20vw;
+  width: 240px;
   border-radius: 50%;
   border: 3px ridge black;
   border-style: inset;
@@ -18,7 +18,7 @@
 
 @media screen and (max-width: 1200px) {
   .home__logo {
-    width: 242px;
+    width: 218px;
   }
 }
 

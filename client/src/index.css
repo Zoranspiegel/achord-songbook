@@ -3,6 +3,8 @@
 :root {
   --main-background-color: #333;
   --main-font-color: #f5f5f5;
+  --secondary-font-color: rgb(243, 199, 4);
+  --active-font-color: rgb(30, 130, 255);
   --main-font-family: 'Syne Mono', monospace;
 
   font-size: 0.81rem;

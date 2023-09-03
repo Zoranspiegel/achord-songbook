@@ -4,7 +4,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   width: 260px;
-  height: 250px;
+  height: 200px;
   border-left: 2px solid rgba(255,255,255,0.3);
   border-top: 2px solid rgba(255,255,255,0.3);
   background: linear-gradient(135deg, rgba(255,255,255, 0.2), rgba(255,255,255, 0));
@@ -29,12 +29,17 @@
 
 .card__title {
   font-size: 1.4em;
+  color: var(--secondary-font-color);
   cursor: inherit;
 }
 
 .card__artist {
-  font-size: 1em;
+  font-size: 0.8em;
   cursor: inherit;
+}
+
+.card__chord {
+  color: var(--secondary-font-color);
 }
 
 .content__shell {

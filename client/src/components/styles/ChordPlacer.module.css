@@ -4,12 +4,12 @@
 }
 
 .chordplacer__chord {
-  color: rgb(243, 199, 4);
+  color: var(--secondary-font-color);
   cursor: url('../../assets/pick-blue-cursor.png'), auto;
 }
 
 .chordplacer__chord_active {
-  color: rgb(30, 130, 255);
+  color: var(--active-font-color);
 }
 
 .chordplacer__form {

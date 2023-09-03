@@ -17,22 +17,51 @@ export default function SongCard({ song }) {
             <h1 className={style.card__title}>{song.title}</h1>
             <h2 className={style.card__artist}>{song.artist}</h2>
             <p className={style.card__content}>
-              {song.content.split(/\n/).map((line) => (
-                <Fragment key={anyHash()}>
-                  {line
-                    .split(/\s/)
-                    .map((word) =>
-                      /^%.+%$/.test(word) ? (
-                        <Fragment key={anyHash()}>
-                          {word.split('%')[1].split('-')[0]}&nbsp;
-                        </Fragment>
-                      ) : (
-                        <Fragment key={anyHash()}>{word}&nbsp;</Fragment>
-                      )
-                    )}
-                  {'\n'}
-                </Fragment>
-              ))}
+              {song.content.split(/\n/).map((line) => {
+                if (line.split(/\s/).find((item) => /^[a-zA-Z]/.test(item))) {
+                  return (
+                    <Fragment key={anyHash()}>
+                      {line.split(/\s/).map((word) => {
+                        if (/^%.+%$/.test(word)) {
+                          return (
+                            <Fragment key={anyHash()}>
+                              {word
+                                .split('')
+                                .filter((char) => char !== '%' && char !== '-')
+                                .join('')}
+                              &nbsp;
+                            </Fragment>
+                          );
+                        } else {
+                          return (
+                            <Fragment key={anyHash()}>{word}&nbsp;</Fragment>
+                          );
+                        }
+                      })}
+                      {'\n'}
+                    </Fragment>
+                  );
+                } else {
+                  return (
+                    <Fragment key={anyHash()}>
+                      {line.split(/\s/).map((word) => {
+                        if (/^%.+%$/.test(word)) {
+                          return (
+                            <span className={style.card__chord} key={anyHash()}>
+                              {word.split('%')[1].split('-')[0]}&nbsp;
+                            </span>
+                          );
+                        } else {
+                          return (
+                            <Fragment key={anyHash()}>{word}&nbsp;</Fragment>
+                          );
+                        }
+                      })}
+                      {'\n'}
+                    </Fragment>
+                  );
+                }
+              })}
             </p>
           </div>
         </div>

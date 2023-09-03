@@ -78,7 +78,7 @@
 }
 
 .details__title {
-  text-shadow: 3px 3px #a6933f;
+  color: var(--secondary-font-color);
 }
 
 .details__title,
