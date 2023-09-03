@@ -1,6 +1,11 @@
 import { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSongDetails, editSong, deleteSong, openFetchGate } from '../redux/actions';
+import {
+  getSongDetails,
+  editSong,
+  deleteSong,
+  openFetchGate,
+} from '../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
 import ChordPlacer from './ChordPlacer';
 import isUUID from '../utils/isUUID';
@@ -101,25 +106,44 @@ export default function SongDetails() {
           <h2 className={style.details__artist}>{songDetails.data.artist}</h2>
           <div className={style.details__content}>
             {songDetails.data.content.split(/\n/).map((line, lineIndex) => {
-              return (
-                <Fragment key={anyHash()}>
-                  {line.split(/\s/).map((word, wordIndex) => {
-                    if (/^%.+%$/.test(word)) {
-                      return (
-                        <ChordPlacer
-                          key={anyHash()}
-                          name={word.split('%')[1].split('-')[0]}
-                          chord={word.split('%')[1].split('-')[1]}
-                          index={{ line: lineIndex, word: wordIndex }}
-                          editSongChord={editSongChord}
-                        />
-                      );
-                    }
-                    return <Fragment key={anyHash()}>{word}&nbsp;</Fragment>;
-                  })}
-                  {'\n'}
-                </Fragment>
-              );
+              if (line.split(/\s/).find((item) => /^[a-zA-Z]/.test(item))) {
+                return (
+                  <Fragment key={anyHash()}>
+                    {line.split(/\s/).map((word) => {
+                      if (/^%.+%$/.test(word)) {
+                        return (
+                          <Fragment key={anyHash()}>{word.split('').filter(char => char !== '%' && char !== '-').join('')}&nbsp;</Fragment>
+                        );
+                      } else {
+                        return (
+                          <Fragment key={anyHash()}>{word}&nbsp;</Fragment>
+                        );
+                      }
+                    })}
+                    {'\n'}
+                  </Fragment>
+                );
+              } else {
+                return (
+                  <Fragment key={anyHash()}>
+                    {line.split(/\s/).map((word, wordIndex) => {
+                      if (/^%.+%$/.test(word)) {
+                        return (
+                          <ChordPlacer
+                            key={anyHash()}
+                            name={word.split('%')[1].split('-')[0]}
+                            chord={word.split('%')[1].split('-')[1]}
+                            index={{ line: lineIndex, word: wordIndex }}
+                            editSongChord={editSongChord}
+                          />
+                        );
+                      }
+                      return <Fragment key={anyHash()}>{word}&nbsp;</Fragment>;
+                    })}
+                    {'\n'}
+                  </Fragment>
+                );
+              }
             })}
           </div>
         </div>
