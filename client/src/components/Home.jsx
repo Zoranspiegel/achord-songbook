@@ -7,6 +7,7 @@ import User from './User';
 import Songs from './Songs';
 import MainButton from './MainButton';
 import style from './styles/Home.module.css';
+import SearchByName from './SearchByName';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -18,9 +19,10 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={style.home__container}>
+    <div className={logged ? style.home__container : style.home__container_centered}>
       <img className={style.home__logo} src={logo} alt='A/Chord logo' />
       <User />
+      {logged && <SearchByName />}
       {logged && <Songs />}
       {logged && <MainButton onClick={() => navigate('/song/edit/new')}>New Song</MainButton>}
     </div>

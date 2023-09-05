@@ -9,8 +9,15 @@ import style from './styles/Songs.module.css';
 export default function Songs() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.loggedUser.data.token);
-  // const userArtists = useSelector((state) => state.userArtists.data);
-  const userSongs = useSelector((state) => state.userSongs.data.sort((a, b) => timeLapse(a.updatedAt) - timeLapse(b.updatedAt)));
+  const userSongs = useSelector((state) => {
+    if (state.searchByName.status === 'success') {
+      return state.searchByName.data;
+    } else {
+      return state.userSongs.data
+        .sort((a, b) => timeLapse(a.updatedAt) - timeLapse(b.updatedAt))
+        .slice(0, 8);
+    }
+  });
   const newSong = useSelector((state) => state.newSong);
   const fetchGate = useSelector((state) => state.fetchGate);
 
@@ -26,7 +33,7 @@ export default function Songs() {
 
   return (
     <div className={style.songs__container}>
-      {userSongs?.slice(0, 8).map((song) => (
+      {userSongs?.map((song) => (
         <SongCard key={anyHash()} song={song} />
       ))}
     </div>

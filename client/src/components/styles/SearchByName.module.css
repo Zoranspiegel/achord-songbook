@@ -1,0 +1,28 @@
+.search__container {
+  position: absolute;
+  top: 20vh;
+  left: 25vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px outset black;
+  border-radius: 30px;
+  background-color: var(--main-background-color);
+  padding: 20px;
+  gap: 5px;
+}
+
+.search__input {
+  outline: none;
+  border-radius: 5px;
+  background-color: black;
+  padding: 5px 10px;
+  color: var(--main-font-color);
+}
+
+@media screen and (max-width: 1440px) {
+  .search__container {
+    left: 15vw;
+  }
+}

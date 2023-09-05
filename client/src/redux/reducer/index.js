@@ -16,6 +16,11 @@ import {
   GET_USER_SONGS,
   GET_USER_SONGS_LOADING,
   GET_USER_SONGS_ERROR,
+  SEARCH_BY_NAME,
+  SEARCH_BY_ARTIST_LOADING,
+  SEARCH_BY_ARTIST,
+  SEARCH_BY_ARTIST_ERROR,
+  CLEAR_SEARCH,
   OPEN_FETCH_GATE,
   CLOSE_FETCH_GATE,
   GET_SONG_DETAILS,
@@ -49,6 +54,15 @@ const initialState = {
     error: null
   },
   userSongs: {
+    data: [],
+    status: 'idle',
+    error: null
+  },
+  searchByName: {
+    data: [],
+    status: 'idle'
+  },
+  searchByArtist: {
     data: [],
     status: 'idle',
     error: null
@@ -158,6 +172,33 @@ export default function reducer(state = initialState, action) {
         ...state,
         editedSong: initialState.editedSong
       };
+    case GET_USER_ARTISTS_LOADING:
+      return {
+        ...state,
+        userArtists: {
+          data: [],
+          status: 'loading',
+          error: null
+        }
+      };
+    case GET_USER_ARTISTS:
+      return {
+        ...state,
+        userArtists: {
+          data: action.payload,
+          status: 'success',
+          error: null
+        }
+      };
+    case GET_USER_ARTISTS_ERROR:
+      return {
+        ...state,
+        userArtists: {
+          data: [],
+          status: 'error',
+          error: action.payload
+        }
+      };
     case GET_USER_SONGS_LOADING:
       return {
         ...state,
@@ -185,32 +226,46 @@ export default function reducer(state = initialState, action) {
           error: action.payload
         }
       };
-    case GET_USER_ARTISTS_LOADING:
+    case SEARCH_BY_NAME:
       return {
         ...state,
-        userArtists: {
+        searchByName: {
+          data: state.userSongs.data.filter(song => song.title.toLowerCase().startsWith(action.payload.toLowerCase())),
+          status: 'success'
+        }
+      };
+    case SEARCH_BY_ARTIST_LOADING:
+      return {
+        ...state,
+        searchByArtist: {
           data: [],
           status: 'loading',
           error: null
         }
       };
-    case GET_USER_ARTISTS:
+    case SEARCH_BY_ARTIST:
       return {
         ...state,
-        userArtists: {
+        searchByArtist: {
           data: action.payload,
           status: 'success',
           error: null
         }
       };
-    case GET_USER_ARTISTS_ERROR:
+    case SEARCH_BY_ARTIST_ERROR:
       return {
         ...state,
-        userArtists: {
+        searchByArtist: {
           data: [],
           status: 'error',
           error: action.payload
         }
+      };
+    case CLEAR_SEARCH:
+      return {
+        ...state,
+        searchByArtist: initialState.searchByArtist,
+        searchByName: initialState.searchByName
       };
     case OPEN_FETCH_GATE:
       return { ...state, fetchGate: true };

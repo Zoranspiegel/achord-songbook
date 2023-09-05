@@ -22,6 +22,14 @@ export const GET_USER_SONGS = 'GET_USER_SONGS';
 export const GET_USER_SONGS_LOADING = 'GET_USER_SONGS_LOADING';
 export const GET_USER_SONGS_ERROR = 'GET_USER_SONGS_ERROR';
 
+export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
+
+export const SEARCH_BY_ARTIST = 'SEARCH_BY_ARTIST';
+export const SEARCH_BY_ARTIST_LOADING = 'SEARCH_BY_ARTIST_LOADING';
+export const SEARCH_BY_ARTIST_ERROR = 'SEARCH_BY_ARTIST_ERROR';
+
+export const CLEAR_SEARCH = 'CLEAR_SEARCH';
+
 export const OPEN_FETCH_GATE = 'OPEN_FETCH_GATE';
 export const CLOSE_FETCH_GATE = 'CLOSE_FETCH_GATE';
 
@@ -175,6 +183,35 @@ export const getUserSongs = (token) => (dispatch) => {
     .then(payload => dispatch({ type: GET_USER_SONGS, payload }))
     // GET_USER_SONGS_ERROR
     .catch(error => dispatch({ type: GET_USER_SONGS_ERROR, payload: error.message }));
+};
+
+// SEARCH_BY_NAME
+export const searchByName = (input) => {
+  return { type: SEARCH_BY_NAME, payload: input };
+};
+
+export const searchByArtist = (artistId, token) => (dispatch) => {
+  // SEARCH_BY_ARTIST_LOADING
+  dispatch({ type: SEARCH_BY_ARTIST_LOADING });
+
+  fetch(`${VITE_SERVER_URL}/song?artist=${artistId}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(res => {
+      if (!res.ok) throw new Error('Bad Request');
+      return res.json();
+    })
+    // SEARCH_BY_ARTIST
+    .then(payload => dispatch({ type: SEARCH_BY_ARTIST, payload }))
+    // SEARCH_BY_ARTIST_ERROR
+    .catch(error => dispatch({ type: SEARCH_BY_ARTIST_ERROR, payload: error.message }));
+};
+
+// CLEAR_SEARCH
+export const clearSearch = () => {
+  return { type: CLEAR_SEARCH };
 };
 
 // OPEN_FETCH_GATE
