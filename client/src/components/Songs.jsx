@@ -14,8 +14,7 @@ export default function Songs() {
       return state.searchByName.data;
     } else {
       return state.userSongs.data
-        .sort((a, b) => timeLapse(a.updatedAt) - timeLapse(b.updatedAt))
-        .slice(0, 8);
+        .sort((a, b) => timeLapse(a.updatedAt) - timeLapse(b.updatedAt));
     }
   });
   const newSong = useSelector((state) => state.newSong);
@@ -33,7 +32,7 @@ export default function Songs() {
 
   return (
     <div className={style.songs__container}>
-      {userSongs?.map((song) => (
+      {userSongs?.slice(0, 8).map((song) => (
         <SongCard key={anyHash()} song={song} />
       ))}
     </div>

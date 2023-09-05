@@ -13,12 +13,44 @@
   gap: 5px;
 }
 
+.input__container {
+  position: relative;
+  border-radius: 5px;
+  background-color: black;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.input__closed,
+.input__opened {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    130deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1)
+  );
+  height: 100%;
+  transition: all 0.2s ease-in-out;
+  cursor: url('../../assets/pick-blue-cursor.png'), auto;
+}
+
+.input__opened {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transform: translateY(-110%);
+}
+
 .search__input {
   outline: none;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   background-color: black;
   padding: 5px 10px;
   color: var(--main-font-color);
+  z-index: 2;
 }
 
 @media screen and (max-width: 1440px) {
