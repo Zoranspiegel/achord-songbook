@@ -10,9 +10,19 @@ module.exports = async (req, res) => {
           artistId: {
             [Op.eq]: artistId
           }
+        },
+        include: {
+          model: artist,
+          attributes: ['name']
         }
       });
-      res.status(200).json(allSongsByArtist);
+      const formattedAllSongsByArtist = allSongsByArtist.map(song => {
+        return {
+          ...song.dataValues,
+          artist: song.dataValues.artist.name
+        };
+      });
+      res.status(200).json(formattedAllSongsByArtist);
     } else {
       const allUserSongs = await song.findAll({
         where: {
