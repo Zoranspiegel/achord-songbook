@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { clearSearch, searchByName } from '../redux/actions';
 import style from './styles/SearchByName.module.css';
 
@@ -8,10 +8,17 @@ export default function SearchByName() {
   const searchInput = useRef(null);
   const [searchState, setSearchState] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
+  const hasSongsByName = useSelector((state) => state.searchByName.status === 'success');
 
   const handleChange = (e) => {
     setSearchState(e.target.value);
   };
+
+  useEffect(() => {
+    if (!hasSongsByName) {
+      setSearchState('');
+    }
+  }, [hasSongsByName]);
 
   useEffect(() => {
     if (searchState) {
@@ -31,7 +38,7 @@ export default function SearchByName() {
   };
 
   return (
-    <div className={style.search__container}>
+    <div className={style.search__plate}>
       <label className={style.search__label}>Search By Name</label>
       <div className={style.input__container}>
         <input

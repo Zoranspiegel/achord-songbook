@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import User from './User';
 import Songs from './Songs';
 import MainButton from './MainButton';
-import style from './styles/Home.module.css';
 import SearchByName from './SearchByName';
+import SearchByArtist from './SearchByArtist';
+import style from './styles/Home.module.css';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function Home() {
       <img className={style.home__logo} src={logo} alt='A/Chord logo' />
       <User />
       {logged && <SearchByName />}
+      {logged && <SearchByArtist />}
       {logged && <Songs />}
       {logged && <MainButton onClick={() => navigate('/song/edit/new')}>New Song</MainButton>}
     </div>

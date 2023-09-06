@@ -12,6 +12,8 @@ export default function Songs() {
   const userSongs = useSelector((state) => {
     if (state.searchByName.status === 'success') {
       return state.searchByName.data;
+    } else if (state.searchByArtist.status === 'success') {
+      return state.searchByArtist.data;
     } else {
       return state.userSongs.data
         .sort((a, b) => timeLapse(a.updatedAt) - timeLapse(b.updatedAt));

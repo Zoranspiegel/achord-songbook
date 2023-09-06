@@ -1,7 +1,13 @@
-.search__plate {
+.search__container {
   position: absolute;
   top: 20vh;
-  left: 25vw;
+  right: 25vw;
+  display: inline;
+  z-index: 100;
+}
+
+.search__plate {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,6 +17,7 @@
   background-color: var(--main-background-color);
   padding: 20px;
   gap: 5px;
+  z-index: 999;
 }
 
 .input__container {
@@ -18,7 +25,6 @@
   border-radius: 5px;
   background-color: black;
   overflow: hidden;
-  z-index: 1;
 }
 
 .input__closed,
@@ -48,12 +54,41 @@
   outline: none;
   background-color: black;
   padding: 5px 10px;
-  color: var(--main-font-color);
-  z-index: 2;
+  color: var(--main-font-color);  
+}
+
+.list__container {
+  position: relative;
+  top: -27px;
+  overflow: hidden;
+}
+
+.artists__list_hidden {
+  transform: translateY(-110%);
+  transition: all 0.3s ease-in-out;
+}
+
+.artists__list_shown {
+  transition: all 0.3s ease-in-out;
+}
+
+.artists__item {
+  list-style: none;
+  border: 1px solid rgba(255,255,255,0.6);
+  background: linear-gradient(136deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3));
+  padding: 5px 10px;
+  backdrop-filter: blur(4px);
+  cursor: url('../../assets/pick-blue-cursor.png'), auto;
+}
+
+.artists__item:hover {
+  border: 1px solid rgba(255,255,0,0.6);
+  background: linear-gradient(136deg, rgba(255,255,0,0.1), rgba(255,255,0,0.3));
+  color: var(--secondary-font-color);
 }
 
 @media screen and (max-width: 1440px) {
-  .search__plate {
-    left: 15vw;
+  .search__container {
+    right: 15vw;
   }
 }
