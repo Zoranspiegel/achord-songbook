@@ -27,6 +27,23 @@
   position: absolute;
   right: 20px;
   top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  background-color: black;
+  border: none;
+}
+
+.delete__icon {
+  width: 15px;
+  height: 15px;
+  color: red;
+}
+
+.delete__icon:hover {
+  color: white;
 }
 
 .delete__background {
@@ -52,8 +69,8 @@
   justify-content: center;
   gap: 10px;
   border-radius: 10px;
-  border: 2px outset rgba(255,255,255,0.5);
-  background-color: grey;
+  border: 2px outset rgba(255,255,255,0.2);
+  background-color: rgba(55,55,55,0.3);
   padding: 10px;
 }
 
@@ -66,7 +83,8 @@
 
 .delete__confirm, .delete__reject {
   border-radius: 5px;
-  width: 2vw;
+  width: 30px;
+  color: white;
 }
 
 .delete__confirm {
@@ -140,6 +158,7 @@
 
   .delete__confirm, .delete__reject {
     width: 22px;
+    font-size: 10px;
   }
 }
 

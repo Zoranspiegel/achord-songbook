@@ -11,6 +11,7 @@ import ChordPlacer from './ChordPlacer';
 import isUUID from '../utils/isUUID';
 import anyHash from '../utils/anyHash';
 import MainButton from './MainButton';
+import { BsFillTrash3Fill } from 'react-icons/bs';
 import style from './styles/SongDetails.module.css';
 
 export default function SongDetails() {
@@ -76,7 +77,7 @@ export default function SongDetails() {
             className={style.details__delete}
             onClick={() => setDeleteVisibility(true)}
           >
-            trash
+            <BsFillTrash3Fill className={style.delete__icon}/>
           </button>
           <div
             className={style.delete__background}

@@ -13,3 +13,9 @@
     width: 100%;
   }
 }
+
+@media screen and (max-width: 970px) {
+  .songs__container {
+    margin-top: 200px;
+  }
+}
