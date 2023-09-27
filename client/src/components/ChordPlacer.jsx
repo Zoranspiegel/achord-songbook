@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState, useRef, useEffect } from 'react';
 import Chord from './Chord';
+import { BsFillTrash3Fill } from 'react-icons/bs';
 import style from './styles/ChordPlacer.module.css';
 
 export default function ChordPlacer({ name, chord, index, editSongChord }) {
@@ -83,7 +84,8 @@ export default function ChordPlacer({ name, chord, index, editSongChord }) {
             className={style.delete__button}
             onClick={() => setDeleteState(true)}
           >
-            &#128465;
+            {/* &#128465; */}
+            <BsFillTrash3Fill className={style.delete__icon}/>
           </button>
           {deleteState && (
             <div className={style.delete__panel}>

@@ -66,6 +66,10 @@
   font-size: 1.3vw;
 }
 
+.delete__icon {
+  height: 13px;
+}
+
 .delete__panel {
   position: absolute;
   z-index: 200;
