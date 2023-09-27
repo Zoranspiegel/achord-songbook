@@ -84,7 +84,6 @@ export default function ChordPlacer({ name, chord, index, editSongChord }) {
             className={style.delete__button}
             onClick={() => setDeleteState(true)}
           >
-            {/* &#128465; */}
             <BsFillTrash3Fill className={style.delete__icon}/>
           </button>
           {deleteState && (
