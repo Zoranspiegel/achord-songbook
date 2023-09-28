@@ -95,36 +95,6 @@
 
 @media screen and (max-width: 970px) {
   .search__container {
-    top: 38vh;
-    left: 35vw;
-    right: 35vw;
-  }
-}
-@media screen and (max-width: 820px) {
-  .search__container {
-    top: 38vh;
-    left: 30vw;
-    right: 30vw;
-  }
-}
-@media screen and (max-width: 620px) {
-  .search__container {
-    top: 38vh;
-    left: 25vw;
-    right: 25vw;
-  }
-}
-@media screen and (max-width: 460px) {
-  .search__container {
-    top: 38vh;
-    left: 20vw;
-    right: 20vw;
-  }
-}
-@media screen and (max-width: 400px) {
-  .search__container {
-    top: 38vh;
-    left: 15vw;
-    right: 15vw;
+   position: static;
   }
 }
