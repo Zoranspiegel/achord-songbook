@@ -71,7 +71,9 @@ export default function SongDetails() {
   if (songDetails.status === 'success')
     return (
       <div className={style.details__container}>
-        <MainButton onClick={() => navigate('/')}>Home</MainButton>
+        <div className={style.details__homebutton}>
+          <MainButton onClick={() => navigate('/')}>Home</MainButton>
+        </div>
         <div className={style.details__plate}>
           <button
             className={style.details__delete}
@@ -148,11 +150,13 @@ export default function SongDetails() {
             })}
           </div>
         </div>
-        <MainButton
-          onClick={() => navigate(`/song/edit/${songDetails.data.id}`)}
-        >
-          Edit Song
-        </MainButton>
+        <div className={style.details__editbutton}>
+          <MainButton
+            onClick={() => navigate(`/song/edit/${songDetails.data.id}`)}
+          >
+            Edit Song
+          </MainButton>
+        </div>
       </div>
     );
 }
