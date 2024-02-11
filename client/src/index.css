@@ -22,7 +22,7 @@
   padding: 0;
   cursor: url('./assets/pick-cursor.png'), auto;
   font-family: inherit;
-  scrollbar-color: #fff transparent;
+  scrollbar-color: #000 transparent;
 }
 
 input[type='text'],
