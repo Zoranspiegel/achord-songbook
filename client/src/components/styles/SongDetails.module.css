@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: flex-start;
   gap: 10px;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 
 .details__homebutton, .details__editbutton {
@@ -143,9 +143,6 @@
 }
 
 @media screen and (max-width: 590px) {
-  .details__container {
-    padding: 0;
-  }
   .details__plate {
     width: 410px;
   }  
@@ -168,15 +165,14 @@
 
 @media screen and (min-width: 1046px) {
   .details__content {
-    height: 90%;
     column-count: 2;
   }
 }
 
 @media screen and (min-width: 1500px) {
   .details__content {
-    height: 90%;
+    height: 75vh;
     column-count: 3;
-    column-gap: 40px;
+    column-fill: auto;
   }
 }

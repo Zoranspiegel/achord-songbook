@@ -35,3 +35,7 @@ body {
   color: var(--main-font-color);
   font-family: var(--main-font-family);
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

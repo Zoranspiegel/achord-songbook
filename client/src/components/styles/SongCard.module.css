@@ -20,7 +20,9 @@
 }
 
 .card__padding {
-  overflow-y: scroll;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .card__padding::-webkit-scrollbar {
