@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 // import Tilt from 'react-parallax-tilt';
 import PropTypes from 'prop-types';
+import { extendNote } from '../utils/extendNote';
 import style from './styles/Chord.module.css';
 
 export default function Chord({ name, chord }) {
@@ -10,10 +11,12 @@ export default function Chord({ name, chord }) {
     const MIN_FRET = chord
       .split('')
       .filter((note) => note !== 'x' && note !== '0')
+      .map((note) => extendNote(note))
       .sort((a, b) => a - b)[0];
     const MAX_FRET = chord
       .split('')
       .filter((note) => note !== 'x' && note !== '0')
+      .map((note) => extendNote(note))
       .sort((a, b) => b - a)[0];
     const FIRST_POSITION = MAX_FRET <= 5;
     const CANVAS = canvas.current;
@@ -116,18 +119,20 @@ export default function Chord({ name, chord }) {
 
       //POSITION
       if (!FIRST_POSITION) {
+        const fixer = MIN_FRET.split('').length > 1 ? 0.3 : 0;
         ctx.font = `${POSITION_SIZE}px Arial`;
         ctx.fillStyle = CHORD_COLOR;
         ctx.fillText(
           `${MIN_FRET}`,
-          XMARGIN * 0.6,
+          XMARGIN * (0.6 - fixer),
           YMARGIN + TOP_PADDING + FRETS_SPACE * 0.7
         );
       }
 
       //NOTES
-      chord.split('').forEach((fret, string) => {
-        if (fret !== 'x' && fret !== '0') {
+      chord.split('').forEach((plainFret, string) => {
+        if (plainFret !== 'x' && plainFret !== '0') {
+          const fret = extendNote(plainFret);
           ctx.beginPath();
           ctx.arc(
             XMARGIN + STRS_SPACE * string,
@@ -152,10 +157,11 @@ export default function Chord({ name, chord }) {
         const barFret = chord
           .split('')
           .filter((note) => note !== 'x' && note !== '0')
+          .map((note) => extendNote(note))
           .sort((a, b) => a - b)[0];
-        const initialPosition = chord.split('').indexOf(barFret);
+        const initialPosition = chord.split('').map((note) => extendNote(note)).indexOf(barFret);
         const finalPosition = Math.abs(
-          chord.split('').reverse().indexOf(barFret) - 5
+          chord.split('').map((note) => extendNote(note)).reverse().indexOf(barFret) - 5
         );
         ctx.beginPath();
         ctx.strokeStyle = CHORD_COLOR;

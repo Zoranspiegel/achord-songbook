@@ -71,7 +71,7 @@ export default function ChordPlacer({ name, chord, index, editSongChord }) {
           <button
             className={style.form__submit}
             type='submit'
-            disabled={!/[0-9x]{6}$/.test(inputState)}
+            disabled={!/[0-9a-x]{6}$/.test(inputState)}
           >
             &#9834;
           </button>
