@@ -1,5 +1,8 @@
 const { VITE_SERVER_URL } = import.meta.env;
 
+export const LOG_TEST_USER = 'LOG_TEST_USER';
+export const LOG_OUT_TEST_USER = 'LOG_OUT_TEST_USER';
+
 export const LOG_USER = 'LOG_USER';
 export const LOGGING_USER = 'LOGGING_USER';
 export const LOGGING_USER_ERROR = 'LOGGING_USER_ERROR';
@@ -41,6 +44,14 @@ export const CLEAN_DETAILS = 'CLEAN_DETAILS';
 export const DELETE_SONG = 'DELETE_SONG';
 export const DELETE_SONG_LOADING = 'DELETE_SONG_LOADING';
 export const DELETE_SONG_ERROR = 'DELETE_SONG_ERROR';
+
+export const logTestUser = () => {
+  return { type: LOG_TEST_USER };
+};
+
+export const logOutTestUser = () => {
+  return { type: LOG_OUT_TEST_USER };
+};
 
 export const logUser = (body) => (dispatch) => {
   // LOGGING_USER

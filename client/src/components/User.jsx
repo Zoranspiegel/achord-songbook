@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import LogoutButton from './LogoutButton';
 import LoginButton from './LoginButton';
 import style from './styles/User.module.css';
+import TestUserButton from './TestUserButton';
 
 export default function User() {
   const loggedUser = useSelector((state) => state.loggedUser);
@@ -16,6 +17,7 @@ export default function User() {
         </div>
       )}
       {loggedUser.status === 'guest' ? <LoginButton /> : <LogoutButton />}
+      {loggedUser.status === 'guest' && <TestUserButton />}
     </div>
   );
 }

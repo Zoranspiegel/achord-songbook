@@ -1,4 +1,6 @@
 import {
+  LOG_TEST_USER,
+  LOG_OUT_TEST_USER,
   LOG_USER,
   LOGGING_USER,
   LOGGING_USER_ERROR,
@@ -33,6 +35,10 @@ import {
 } from '../actions';
 
 const initialState = {
+  testUser: {
+    status: 'offline',
+    error: null
+  },
   loggedUser: {
     data: {},
     status: 'guest',
@@ -82,6 +88,22 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case LOG_TEST_USER: 
+      return {
+        ...state,
+        testUser: {
+          status: 'online',
+          error: null
+        }
+      };
+    case LOG_OUT_TEST_USER:
+      return {
+        ...state,
+        testUser: {
+          status: 'offline',
+          error: null
+        }
+      };
     case LOGGING_USER:
       return {
         ...state,

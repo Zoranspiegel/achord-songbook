@@ -6,15 +6,31 @@ import { logUser, logoutUser } from '../redux/actions';
 
 export default function MyAuthProvider({ children }) {
   const dispatch = useDispatch();
-  const loggedUser = useSelector(state => state.loggedUser);
+  const loggedUser = useSelector((state) => state.loggedUser);
+  const testUser = useSelector((state) => state.testUser);
   const { isAuthenticated, isLoading, user } = useAuth0();
 
   useEffect(() => {
     console.log('STATUS: ', loggedUser.status);
+    console.log('TEST_USER_STATUS: ', testUser);
   }, [loggedUser]);
 
   useEffect(() => {
-    if (isAuthenticated && !isLoading && loggedUser.status === 'guest') {
+    if (
+      !isAuthenticated &&
+      !isLoading &&
+      loggedUser.status === 'guest' &&
+      testUser.status === 'online'
+    ) {
+      console.log('LOGING_TEST_USER');
+      const body = {
+        auth0_sub: 'auth0|6736f066b791e9850005c2b3',
+        nickname: 'Test User',
+        email: 'testuser@gmail.com',
+        profile_picture: 'https://cdn.auth0.com/avatars/te.png'
+      };
+      dispatch(logUser(body));
+    } else if (isAuthenticated && !isLoading && loggedUser.status === 'guest') {
       const body = {
         auth0_sub: user.sub,
         name: user.given_name,
@@ -24,20 +40,21 @@ export default function MyAuthProvider({ children }) {
       };
       dispatch(logUser(body));
       console.log('Logged');
-    } else if (!isAuthenticated && !isLoading && loggedUser.status !== 'guest') {
+    } else if (
+      testUser.status === 'offline' &&
+      !isAuthenticated &&
+      !isLoading &&
+      loggedUser.status !== 'guest'
+    ) {
       dispatch(logoutUser());
       console.log('Not logged');
     }
     // eslint-disable-next-line
-  }, [isAuthenticated, isLoading, user, loggedUser]);
+  }, [isAuthenticated, isLoading, user, loggedUser, testUser]);
 
-  return (
-    <>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }
 
 MyAuthProvider.propTypes = {
-  children: PropTypes.any.isRequired,
+  children: PropTypes.any.isRequired
 };
